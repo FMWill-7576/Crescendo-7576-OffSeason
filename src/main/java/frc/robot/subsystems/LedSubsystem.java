@@ -298,11 +298,12 @@ private void blueDisabled(){
    if (!DriverStation.isEnabled()) {
       if (ally != null) {
         if (ally== Alliance.Blue){
-        blueDisabled();
+        //blueDisabled();
+        rainbow();
         }
         else{
-         redDisabled();
-         
+         //redDisabled();
+         rainbow();
         } 
       }
       else {

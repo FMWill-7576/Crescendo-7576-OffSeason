@@ -51,11 +51,11 @@ public class autoShoot extends Command {
     tableArm.put(3.16, -14.0);
     tableArm.put(3.55, -11.0);
     tableArm.put(3.86, -8.4);
-     tableArm.put(4.08, -7.7);
-     tableArm.put(4.67, -7.4);
+    tableArm.put(4.08, -7.7);
+    tableArm.put(4.67, -7.4);
 
 
-   // tableShooter.put(125.0, 450.0);
+    // tableShooter.put(125.0, 450.0);
     //tableShooter.put(200.0, 510.0);
     tableShooter.put(2.96, 6600.0);
     tableShooter.put(1.74, 4000.0);

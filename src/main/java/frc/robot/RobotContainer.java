@@ -224,16 +224,17 @@ public class RobotContainer
   
   
   driverPS5.square().whileTrue(new RepeatCommand(new InstantCommand(s_Swerve::lock, s_Swerve)));
-  driverPS5.L1().onTrue(Commands.runOnce(() -> speedRate = 0.25));
-  driverPS5.L1().onFalse(Commands.runOnce(() -> speedRate = 1.0));
+  driverPS5.L1().onTrue(Commands.runOnce(() -> speedRate *= 0.25));
+  driverPS5.L1().onFalse(Commands.runOnce(() -> speedRate *= 1.0));
 
-  driverPS5.R1().onTrue(Commands.runOnce(() -> speedRate = 0.50));
-  driverPS5.R1().onFalse(Commands.runOnce(() -> speedRate = 1.0));
+  driverPS5.R1().onTrue(Commands.runOnce(() -> speedRate *= 0.50));
+  driverPS5.R1().onFalse(Commands.runOnce(() -> speedRate *= 1.0));
 
-  driverPS5.cross().whileTrue(s_Climber.run(() -> s_Climber.leftClimb()));
+  //KAAN (Tırmanma yok)
+  //driverPS5.cross().whileTrue(s_Climber.run(() -> s_Climber.leftClimb()));
 
-
-  driverPS5.triangle().whileTrue(s_Climber.run(() -> s_Climber.leftClimbUp()));
+  //KAAN (Tırmanma yok)
+  //driverPS5.triangle().whileTrue(s_Climber.run(() -> s_Climber.leftClimbUp()));
 
   //driverPS5.R3().onTrue(Commands.runOnce(() -> s_Vision.setLimelightLed()));
 
@@ -256,9 +257,9 @@ public class RobotContainer
 
   
   operatorXbox.x().whileTrue(s_Intake.run(() -> s_Intake.manualIntake(0.99)));
+  operatorXbox.x().whileTrue(s_Indexer.run(() -> s_Indexer.manualIndex(0.75)));
 
   operatorXbox.b().whileTrue(s_Intake.run(() -> s_Intake.manualIntake(-0.85)));
-
   operatorXbox.b().whileTrue(s_Indexer.run(() -> s_Indexer.manualIndex(-0.35)));
   operatorXbox.b().whileTrue(s_Shooter.run(() -> s_Shooter.shooterSet(-1500,-1500)));
 
@@ -283,9 +284,11 @@ public class RobotContainer
     
   operatorXbox.y().whileTrue(s_Arm.run(() -> s_Arm.armDrive(0.4)));
 
-  operatorXbox.rightStick().whileTrue(s_Climber.run(() -> s_Climber.manualClimb(1.0)));
+  //Tırmanma Olduğu İçin Kapandı (KAAN)
+  //operatorXbox.rightStick().whileTrue(s_Climber.run(() -> s_Climber.manualClimb(1.0)));
+  //operatorXbox.leftStick().whileTrue(s_Climber.run(() -> s_Climber.manualClimb(-1.0)));
 
-  operatorXbox.leftStick().whileTrue(s_Climber.run(() -> s_Climber.manualClimb(-1.0)));
+
   //operatorXbox.b().whileTrue(s_Arm.run(() -> s_Arm.armDrive(-0.45)));
  // operatorXbox.a().whileTrue(s_Arm.run(() -> s_Arm.armDrive(-0.3)));
  operatorXbox.a().whileTrue(s_Arm.run(()-> s_Arm.armDrive(-0.4)));
@@ -294,7 +297,6 @@ public class RobotContainer
  operatorXbox.povDown().onTrue(s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-40.7))));
  operatorXbox.povRight().onTrue(s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-9))));
  //operatorXbox.povDown().whileTrue(s_Arm.run(()-> s_Arm.armHold()));
- operatorXbox.x().whileTrue(s_Indexer.run(() -> s_Indexer.manualIndex(0.75)));
  operatorXbox.start().whileTrue(
     new RunCommand(()->
      s_Arm.armHome(),s_Arm).
