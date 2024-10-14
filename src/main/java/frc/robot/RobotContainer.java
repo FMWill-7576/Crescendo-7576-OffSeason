@@ -255,7 +255,20 @@ public class RobotContainer
    // andThen(() ->s_Indexer.manualIndex(0.65))
    );
 
-  
+
+   driverPS5.circle().whileTrue(new RunCommand(()->{
+    autoShoot ot123 = new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve, s_Shooter);
+    ot123.isFinished();
+  }));
+
+  driverPS5.cross().whileTrue(new RunCommand(()->{
+    autoShoot ot123 = new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve, s_Shooter);
+    if(ot123.isFinished() == true)
+    {
+      s_Arm.armSet(Rotation2d.fromDegrees(-40.7));
+    }
+  }));
+
   operatorXbox.x().whileTrue(s_Intake.run(() -> s_Intake.manualIntake(0.99)));
   operatorXbox.x().whileTrue(s_Indexer.run(() -> s_Indexer.manualIndex(0.75)));
 
@@ -278,12 +291,11 @@ public class RobotContainer
   operatorXbox.rightTrigger().whileTrue(
     new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve,s_Shooter));
 
-    /*
+  
   operatorXbox.rightTrigger().onFalse(
     s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-40.7)))
-    .onlyIf(()->!!s_Indexer.isNoteInIndexer()
+    .onlyIf(()->!s_Indexer.isNoteInIndexer()
   ));
-  */
 
 
   operatorXbox.leftTrigger().whileTrue(
