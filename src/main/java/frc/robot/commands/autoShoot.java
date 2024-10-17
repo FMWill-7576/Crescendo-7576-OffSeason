@@ -75,9 +75,11 @@ public class autoShoot extends Command {
    s_Shooter.shooterSet(tableShooter.get(s_Swerve.getVisionDistance()),tableShooter.get(s_Swerve.getVisionDistance())+500);
     if (s_Shooter.isShooterAtSetpoint()){
       s_Shooter.shooterSet(tableShooter.get(s_Swerve.getVisionDistance()),tableShooter.get(s_Swerve.getVisionDistance())+500);
-      s_Indexer.manualIndex(0.75);
-      if(!s_Indexer.isNoteInIndexer())
+      s_Indexer.manualIndex(0.95);
+      if(!s_Indexer.isNoteInIndexer()){
+        s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-40.7)));
     s_isDone = true;
+      }
    }
     //s_Led.autoArm();
     

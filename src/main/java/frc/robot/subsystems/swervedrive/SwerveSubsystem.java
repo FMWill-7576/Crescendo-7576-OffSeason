@@ -201,7 +201,11 @@ public double getVisionDistance(){
     // Create a path following command using AutoBuilder. This will also trigger event markers.
     return new PathPlannerAuto(pathName);
   }
-
+  public Command gettraj(PathPlannerPath  pathName)
+  {
+    // Create a path following command using AutoBuilder. This will also trigger event markers.
+    return AutoBuilder.followPath(pathName);
+  }
   /**
    * Use PathPlanner Path finding to go to a point on the field.
    *

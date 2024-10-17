@@ -72,7 +72,7 @@ public class RobotContainer
   private SlewRateLimiter strafeLimiter  = new SlewRateLimiter(5.0);
   private SlewRateLimiter rotationLimiter  = new SlewRateLimiter(5.0);
   private double speedRate = 1.0;
-  
+  private int kol = 0;
  
 
 
@@ -83,9 +83,10 @@ public class RobotContainer
    */
   public RobotContainer()
   {
-    DriverStation.Alliance color;
-    color= DriverStation.getAlliance().get();
-    int isBlueAlliance= DriverStation.Alliance.Blue==color?1 :-1;
+    //DriverStation.Alliance color;
+    //color= DriverStation.getAlliance().get();
+    //int isBlueAlliance= DriverStation.Alliance.Blue==color?1 :-1;
+    int isBlueAlliance=1;
     // NamedCommands.registerCommand("runIntake",
     //  s_Intake.run(()-> s_Intake.manualIntake(0.95)).until(()->s_Indexer.isNoteInIndexer()));
     NamedCommands.registerCommand("runIntake", new IntakeNote(s_Indexer, s_Intake, s_Led));
@@ -176,10 +177,10 @@ public class RobotContainer
     s_Led.setDefaultCommand(s_Led.LEDCommand());
 
    // Load a Choreo trajectory as a PathPlannerPath
-    PathPlannerPath exampleChoreoTraj = PathPlannerPath.fromChoreoTrajectory("deneme path");
-    ChoreoTrajectory traj = Choreo.getTrajectory("deneme path"); //
+    PathPlannerPath exampleChoreoTraj = PathPlannerPath.fromChoreoTrajectory("OT");
+    ChoreoTrajectory traj = Choreo.getTrajectory("deneme path"); 
 
-    m_chooser.setDefaultOption("mid pre+center", s_Swerve.getAutonomousCommand("mid pre+center"));
+    m_chooser.setDefaultOption("mid 3 piece amp side", s_Swerve.getAutonomousCommand("mid 3 piece amp side"));
     SmartDashboard.putData("OTONOM", m_chooser);
     m_chooser.addOption("4 piece source", s_Swerve.getAutonomousCommand("4 piece source"));
     m_chooser.addOption("mid two", s_Swerve.getAutonomousCommand("mid two"));
@@ -193,12 +194,12 @@ public class RobotContainer
     m_chooser.addOption("top pre chaos", s_Swerve.getAutonomousCommand("top pre chaos"));
     m_chooser.addOption("top pre", s_Swerve.getAutonomousCommand("top pre"));
     m_chooser.addOption("top pre+1", s_Swerve.getAutonomousCommand("top pre+1"));
-    m_chooser.addOption("bottom pre taxi", s_Swerve.getAutonomousCommand("bottom pre taxi"));
+    //m_chooser.addOption("bottom pre taxi", s_Swerve.getAutonomousCommand("bottom pre taxi"));
     m_chooser.addOption("bottom pre midfield", s_Swerve.getAutonomousCommand("bottom pre midfield"));
-    m_chooser.addOption("bottom pre taxi+1", s_Swerve.getAutonomousCommand("bottom pre taxi+1"));
+    //m_chooser.addOption("bottom pre taxi+1", s_Swerve.getAutonomousCommand("bottom pre taxi+1"));
     m_chooser.addOption("bottom pre chaos2", s_Swerve.getAutonomousCommand("bottom pre chaos2"));
     m_chooser.addOption("do nothing", s_Swerve.getAutonomousCommand("do nothing"));
-    m_chooser.addOption("ot reis", s_Swerve.getAutonomousCommand("OT"));
+    m_chooser.addOption("mid 3 piece amp side", s_Swerve.getAutonomousCommand("mid 3 piece amp side"));
   }
 
   /**
@@ -237,6 +238,12 @@ public class RobotContainer
   //driverPS5.triangle().whileTrue(s_Climber.run(() -> s_Climber.leftClimbUp()));
 
   //driverPS5.R3().onTrue(Commands.runOnce(() -> s_Vision.setLimelightLed()));
+  driverPS5.triangle().whileTrue(
+   s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-40.7)
+  // onlyIf(() -> s_Indexer.isNoteInIndexer()).
+   // until(() -> s_Shooter.isShooterAtSetpoint()).
+   // andThen(() ->s_Indexer.manualIndex(0.65))
+   )));
 
 
   driverPS5.L2().whileTrue(
@@ -255,18 +262,15 @@ public class RobotContainer
    // andThen(() ->s_Indexer.manualIndex(0.65))
    );
 
+  //driverPS5.circle().whileFalse(s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-40.7))));
+
 
    driverPS5.circle().whileTrue(new RunCommand(()->{
-    autoShoot ot123 = new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve, s_Shooter);
-    ot123.isFinished();
+    new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve, s_Shooter);
   }));
 
   driverPS5.cross().whileTrue(new RunCommand(()->{
-    autoShoot ot123 = new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve, s_Shooter);
-    if(ot123.isFinished() == true)
-    {
-      s_Arm.armSet(Rotation2d.fromDegrees(-40.7));
-    }
+   new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve, s_Shooter);
   }));
 
   operatorXbox.x().whileTrue(s_Intake.run(() -> s_Intake.manualIntake(0.99)));
@@ -276,17 +280,10 @@ public class RobotContainer
   operatorXbox.b().whileTrue(s_Indexer.run(() -> s_Indexer.manualIndex(-0.35)));
   operatorXbox.b().whileTrue(s_Shooter.run(() -> s_Shooter.shooterSet(-1500,-1500)));
 
-  
- operatorXbox.back().whileTrue(
-   new ShootCommand(s_Indexer, s_Led, s_Shooter, 2000, 2000)
-  );
+
+
+  operatorXbox.back().whileTrue(new ShootCommand(s_Indexer, s_Led, s_Shooter, 2000, 2000));
   //AUTODAN SONRA DUZ KOL DENEMESI DENENCEK!!
-  /*
-  operatorXbox.back().onFalse(
-    //s_Arm.run(()-> s_Arm.armSet(Rotation2d.fromDegrees(-40.7))
-    //.onlyIf(()->!s_Indexer.isNoteInIndexer()
-  ));
-  */
 
   operatorXbox.rightTrigger().whileTrue(
     new autoShoot(s_Indexer, s_Arm, s_Led, s_Swerve,s_Shooter));

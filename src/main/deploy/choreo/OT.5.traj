@@ -190,28 +190,5 @@
       "timestamp": 0.7308344517726186
     }
   ],
-  "eventMarkers": [
-    {
-      "timestamp": 0.630834451772619,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "runIntake"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 1
-              }
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "eventMarkers": []
 }
