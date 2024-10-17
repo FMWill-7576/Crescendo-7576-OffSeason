@@ -232,28 +232,5 @@
       "timestamp": 0.9708416139069227
     }
   ],
-  "eventMarkers": [
-    {
-      "timestamp": 0.8708416139069227,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "runIntake"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 1
-              }
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "eventMarkers": []
 }

@@ -83,9 +83,9 @@ public class RobotContainer
    */
   public RobotContainer()
   {
-    DriverStation.Alliance color;
-    color= DriverStation.getAlliance().get();
-    int isBlueAlliance= DriverStation.Alliance.Blue==color?1 :-1;
+    //DriverStation.Alliance color;
+    //color= DriverStation.getAlliance().get();
+    int isBlueAlliance=1;
     // NamedCommands.registerCommand("runIntake",
     //  s_Intake.run(()-> s_Intake.manualIntake(0.95)).until(()->s_Indexer.isNoteInIndexer()));
     NamedCommands.registerCommand("runIntake", new IntakeNote(s_Indexer, s_Intake, s_Led));
@@ -176,10 +176,10 @@ public class RobotContainer
     s_Led.setDefaultCommand(s_Led.LEDCommand());
 
    // Load a Choreo trajectory as a PathPlannerPath
-    PathPlannerPath exampleChoreoTraj = PathPlannerPath.fromChoreoTrajectory("deneme path");
+    PathPlannerPath exampleChoreoTraj = PathPlannerPath.fromChoreoTrajectory("OT");
     ChoreoTrajectory traj = Choreo.getTrajectory("deneme path"); //
 
-    m_chooser.setDefaultOption("mid pre+center", s_Swerve.getAutonomousCommand("mid pre+center"));
+    m_chooser.setDefaultOption("ot reis", s_Swerve.gettraj(exampleChoreoTraj));
     SmartDashboard.putData("OTONOM", m_chooser);
     m_chooser.addOption("4 piece source", s_Swerve.getAutonomousCommand("4 piece source"));
     m_chooser.addOption("mid two", s_Swerve.getAutonomousCommand("mid two"));
@@ -193,12 +193,12 @@ public class RobotContainer
     m_chooser.addOption("top pre chaos", s_Swerve.getAutonomousCommand("top pre chaos"));
     m_chooser.addOption("top pre", s_Swerve.getAutonomousCommand("top pre"));
     m_chooser.addOption("top pre+1", s_Swerve.getAutonomousCommand("top pre+1"));
-    m_chooser.addOption("bottom pre taxi", s_Swerve.getAutonomousCommand("bottom pre taxi"));
+  
     m_chooser.addOption("bottom pre midfield", s_Swerve.getAutonomousCommand("bottom pre midfield"));
-    m_chooser.addOption("bottom pre taxi+1", s_Swerve.getAutonomousCommand("bottom pre taxi+1"));
+   
     m_chooser.addOption("bottom pre chaos2", s_Swerve.getAutonomousCommand("bottom pre chaos2"));
     m_chooser.addOption("do nothing", s_Swerve.getAutonomousCommand("do nothing"));
-    m_chooser.addOption("ot reis", s_Swerve.getAutonomousCommand("OT"));
+    m_chooser.addOption("ot reis", s_Swerve.gettraj(exampleChoreoTraj));
   }
 
   /**

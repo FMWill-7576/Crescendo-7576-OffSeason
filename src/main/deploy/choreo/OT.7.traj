@@ -169,28 +169,5 @@
       "timestamp": 0.6611791971090799
     }
   ],
-  "eventMarkers": [
-    {
-      "timestamp": 0.6611791971090799,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "shootPodium"
-              }
-            },
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 1
-              }
-            }
-          ]
-        }
-      }
-    }
-  ]
+  "eventMarkers": []
 }
